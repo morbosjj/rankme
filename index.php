@@ -223,6 +223,7 @@
   <script src="js/modal.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script> 
   <script src="js/app.js"></script>
+    <script src="index.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>

@@ -1,2 +1,2 @@
 require('dotenv').config();
-console.log(proccess.env);
+console.log(process.env);

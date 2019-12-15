@@ -126,7 +126,7 @@ function handleSignoutClick() {
 function sendToServer(id_token, email, firstname){
     let xhr = new XMLHttpRequest();
     let params = 'id_token=' + id_token +'&email=' + email +'&firstname='+ firstname;
-    xhr.open('POST', 'https://rank-me.000webhostapp.com/auth.php', true);
+    xhr.open('POST', 'https://the-rank-me.herokuapp.com/auth/auth.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if(this.status == 200){
