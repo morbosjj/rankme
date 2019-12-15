@@ -1,0 +1,18 @@
+{
+  "name": "rankme",
+  "version": "1.0.0",
+  "description": "Rank Youtubers",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "youtube-api"
+  ],
+  "author": "JJ Morbos",
+  "license": "MIT"
+}
