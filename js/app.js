@@ -2,7 +2,7 @@ const CLIENT_ID = '328447961111-6ks6c3u6vmo8kvta8pjlbit7f3rpeoup.apps.googleuser
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
 const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
 
-const authorizeButton = document.getElementById('authorize-btn');
+const authorizeButton = document.getElementById('authorize-button');
 const signoutButton = document.getElementById('signout-button');
 const content = document.getElementById('content');
 const channelForm = document.getElementById('channel-form');
@@ -46,6 +46,28 @@ dropdown.addEventListener('click', (e) => {
 });
 
 
+function onSignIn(googleUser){
+    let profile = googleUser.getBasicProfile();
+    let id_token = googleUser.getAuthResponse().id_token;
+    let email = profile.getEmail();
+    let firstname = profile.getGivenName();
+
+    sendToServer(id_token, email, firstname);
+}
+
+function sendToServer(id_token, email, firstname){
+    let xhr = new XMLHttpRequest();
+    let params = 'id_token=' + id_token +'&email=' + email +'&firstname='+ firstname;
+    xhr.open('POST', 'https://rank-me.000webhostapp.com/auth/auth.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function(e) {
+        if (this.readyState == 4 && this.status == 200) {
+           
+        }
+       
+    }
+    xhr.send(params);
+}
 
 // load auth2 library
 function handleClientLoad() {
@@ -69,7 +91,7 @@ function initClient() {
         // handle initial sign in state
         updateSigninStatus(auth2.isSignedIn.get());
 
-        //authorizeButton.onclick = handleAuthClick;
+        authorizeButton.onclick = handleAuthClick;
         signoutButton.onclick = handleSignoutClick;
     });
 }
@@ -90,12 +112,10 @@ function updateSigninStatus(isSignedIn) {
     
     if (isSignedIn) {
         var profile = auth2.currentUser.get().getBasicProfile();
-        let id_token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
-        let email = profile.getEmail();
         let firstname = profile.getGivenName();
             
         showProfile(firstname);
-        sendToServer(id_token, email, firstname);
+        // sendToServer(id_token, email, firstname);
         
         authbtn.style.display = "none";
         dropdown.style.display = "block";
@@ -115,25 +135,12 @@ function updateSigninStatus(isSignedIn) {
 
 //handle login
 function handleAuthClick() {
-    gapi.auth2.getAuthInstance().signIn();
+   gapi.auth2.getAuthInstance().signIn();
 }
 
 function handleSignoutClick() {
     gapi.auth2.getAuthInstance().signOut();
     console.log('logout');
-}
-
-function sendToServer(id_token, email, firstname){
-    let xhr = new XMLHttpRequest();
-    let params = 'id_token=' + id_token +'&email=' + email +'&firstname='+ firstname;
-    xhr.open('POST', 'https://the-rank-me.herokuapp.com/auth/auth.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-        if(this.status == 200){
-            console.log(this.responseText);
-        }
-    }
-    xhr.send(params);
 }
 //display channel data
 

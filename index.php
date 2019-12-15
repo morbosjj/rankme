@@ -22,7 +22,7 @@
 
               <div class="modal-body">
                 <br>
-                <div class="g-signin2"></div>
+                <div class="g-signin2" id="authorize-button" data-onsuccess="onSignIn"></div>
                 
 
                 <div class="middle-modal">
@@ -220,10 +220,9 @@
 
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.15/dist/bootstrap-native-v4.min.js"></script>
-  <script src="js/modal.js"></script>
+   <script src="js/modal.js"></script> 
   <script src="https://apis.google.com/js/platform.js" async defer></script> 
   <script src="js/app.js"></script>
-    <script src="index.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>

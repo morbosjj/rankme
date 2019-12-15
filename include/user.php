@@ -4,7 +4,7 @@ class User extends Database {
   protected $user_id;
   protected $firstname;
   protected $email;
-  protected $id_token;
+  protected $id_sub;
 
   function getUserId($user_id){
     return $this->user_id;
@@ -27,33 +27,33 @@ class User extends Database {
     $this->email = $email;
     return $this;
   }
-  function getIdToken($id_token){
-    return $this->id_token;
+  function getIdSub($id_sub){
+    return $this->id_sub;
   }
-  function setIdToken($id_token){
-    $this->id_token = $id_token;
+  function setIdSub($id_sub){
+    $this->id_sub = $id_sub;
     return $this;
   }
 
   function create(){
-    $stmt = $this->con->prepare("INSERT INTO users (email, firstname, id_token) VALUES (?, ?, ?)");
-    $stmt->bind_param('sss', $this->email, $this->firstname, $this->id_token);
+    $stmt = $this->con->prepare("INSERT INTO users (email, firstname, id_sub) VALUES (?, ?, ?)");
+    $stmt->bind_param('sss', $this->email, $this->firstname, $this->id_sub);
     $stmt->execute();
     $stmt->close();
 
     $this->con->close();
   }
 
-  function idTokenExist(){
-    $stmt = $this->con->prepare("SELECT * FROM users WHERE id_token =?");
-    $stmt->bind_param('s', $this->id_token);
+  function idSubExist(){
+    $stmt = $this->con->prepare("SELECT * FROM users WHERE id_sub =?");
+    $stmt->bind_param('s', $this->id_sub);
     $stmt->execute();
 
     $result = $stmt->get_result();
     $stmt->close();
 
     while($row = $result->fetch_assoc()){
-      if($this->id_token === $row['id_token']){
+      if($this->id_sub === $row['id_sub']){
         return json_encode([
           "status"=> "error", 
           "message"=> " Id token is already exist. Please Try again"
