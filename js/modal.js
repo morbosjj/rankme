@@ -18,7 +18,7 @@ let modalInitJS = new Modal(myModal, {
 // when we click btnModal, open the modal
 btnModal.addEventListener('click', (e) => {
   modalInitJS.show();
-}, false)
+}, false);
 
 // BONUS
 // since there is no triggering element, you might need
