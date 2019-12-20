@@ -1,4 +1,3 @@
-    const CLIENT_ID = '328447961111-6ks6c3u6vmo8kvta8pjlbit7f3rpeoup.apps.googleusercontent.com';
     const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
     const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
 
@@ -84,11 +83,11 @@
     function initClient() {
         gapi.auth2.init({
             discoveryDocs: DISCOVERY_DOCS,
-            clientId: CLIENT_ID,
+            clientId: config.clientid,
         }).then(() => {
             let auth2 = gapi.auth2.init({
                     discoveryDocs: DISCOVERY_DOCS,
-                    clientId: CLIENT_ID,
+                    clientId: config.clientid,
                 });
             //Listen for sign in state changes
             auth2.isSignedIn.listen(updateSigninStatus);
@@ -103,7 +102,7 @@
     function youtubeClient(){
         gapi.client.init({
             discoveryDocs: DISCOVERY_DOCS,
-            clientId: CLIENT_ID,
+            clientId: config.clientid,
             scope: SCOPES
         });
     }
@@ -111,7 +110,7 @@
     function updateSigninStatus(isSignedIn) {
         let auth2 = gapi.auth2.init({
                 discoveryDocs: DISCOVERY_DOCS,
-                clientId: CLIENT_ID,
+                clientId: config.clientid,
             });
         
         if (isSignedIn) {
@@ -233,8 +232,7 @@
     }
     async function getChannel(){
         let id_param = getParameterByName('id');
-        const API_KEY = "AIzaSyCjeyFtTzAyTxB8J8_7Lduql8GPBnPVoTM";
-        const url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id="+id_param+"&key="+ API_KEY +"&fields=items(id,snippet(title, description, customUrl, thumbnails), statistics(viewCount,subscriberCount,videoCount))&maxResults=10";
+        const url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id="+id_param+"&key="+ config.apikey +"&fields=items(id,snippet(title, description, customUrl, thumbnails), statistics(viewCount,subscriberCount,videoCount))&maxResults=10";
         const res = await fetch(url);
         let data = await res.json();
 
