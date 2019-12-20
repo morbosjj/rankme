@@ -259,12 +259,12 @@
         showTags(1);       
         let channelsListItems = subscribers;
         if(channelsListItems){
-            channelsListItems.forEach(item => {
+            channelsListItems.forEach((item, i) => {
                 let keyword_param = getParameterByName('keyword');
                 outputSearch += `
                         <div class="youtuber-details grid">
                             <div class="rank-number">
-                                <strong>1</strong>
+                                <strong>${'%d', i+1}</strong>
                             </div>
                             
                             <div class="img-youtuber">
