@@ -487,6 +487,15 @@ body {
   font-size: 20px;
 }
 
+/* login */
+.content {
+  background: #f00000;
+  background: -webkit-linear-gradient(to right, #f00000, #dc281e);
+  background: linear-gradient(to right, #f00000, #dc281e);
+  height: 100vh;
+}
+
+
 
 @media (min-width: 768px){
   .navigation {

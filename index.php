@@ -79,6 +79,11 @@
                                 <li id="btn-auth">
                                     <button class="button signin-button" id="anchorID">Sign in</button>
                                 </li>
+                                <li id="btn-auth">
+                                    <a href="user/register-user.php">
+                                        <button class="button signin-button" id="anchorID">Register</button>
+                                    </a>
+                                </li>
                                 <li id="dropdown" class="profile-account" style="display: none;">
                                     <button id="profile-name" class="button currentuser-btn dropdown-btn icon i-caret"></button>
                  
@@ -166,7 +171,9 @@
             </div>
         </div>
     </footer>
-    
+
+
+    <script src="js/config.js"></script>
     <script src="js/autocomplete.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.15/dist/bootstrap-native-v4.min.js"></script>
     <script src="js/modal.js"></script> 

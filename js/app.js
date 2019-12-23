@@ -22,22 +22,13 @@
     const authbtn = document.getElementById('btn-auth');
     const urlParams = new URLSearchParams(window.location.search);
 
-    //Button google Api
-    // function renderButton() {
-    //     gapi.signin2.render('authorize-btn', {
-    //         'width': 240,
-    //         'height': 50,
-    //         'longtitle': true,
-    //         'theme': 'dark',
-    //     });
-    // }
+    // searchForm.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     const keyword = searchInput.value;
 
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const keyword = searchInput.value;
+    //     getSearch(keyword);
+    // });
 
-        getSearch(keyword);
-    });
 
     function toggle(){
         dropdownContent.classList.toggle('is-visible');
@@ -64,8 +55,9 @@
         xhr.open('POST', 'https://rank-me.000webhostapp.com/auth/auth.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function(e) {
+            e.preventDefault();
             if (this.readyState == 4 && this.status == 200) {
-               
+                
             }
            
         }
@@ -93,7 +85,6 @@
             auth2.isSignedIn.listen(updateSigninStatus);
             // handle initial sign in state
             updateSigninStatus(auth2.isSignedIn.get());
-
             authorizeButton.onclick = handleAuthClick;
             signoutButton.onclick = handleSignoutClick;
         });
@@ -114,37 +105,36 @@
             });
         
         if (isSignedIn) {
-            var profile = auth2.currentUser.get().getBasicProfile();
+            let profile = auth2.currentUser.get().getBasicProfile();
             let firstname = profile.getGivenName();
-                
-            showProfile(firstname);
-            // sendToServer(id_token, email, firstname);
             
+            showProfile(firstname);
             authbtn.style.display = "none";
             dropdown.style.display = "block";
-            // signinModal.style.display = "none";
-            // content.style.display = "block";
-            // videoContainer.style.display = "block";
-            // getChannel(defaultChange);
+
 
         } else {
             authbtn.style.display = "block";
             dropdown.style.display = "none";
-            // signinModal.style.display = "block";
-            // // content.style.display = "none";
-            // videoContainer.style.display = "none";
         }
     }
 
     //handle login
     function handleAuthClick() {
-       gapi.auth2.getAuthInstance().signIn();
+       gapi.auth2.getAuthInstance().signIn({ scope: 'profile email'})
+        .then(() => {
+            let id_token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
+            window.location.href = "https://rank-me.000webhostapp.com/auth/auth.php?id_token="+ id_token;
+            console.log('Sign in Successful');
+        })
+        .catch((err) => console.error(err));
     }
 
     function handleSignoutClick() {
         gapi.auth2.getAuthInstance().signOut();
         console.log('logout');
     }
+    
     //display channel data
 
     function showChannelData(data) {
@@ -156,41 +146,41 @@
         profileName.innerHTML = data;
     }
 
-    function getSearch(keyword) {
-        gapi.client.youtube.search.list({
-                "part": "snippet",
-                "maxResult": 10,
-                "order": "viewCount",
-                "q": keyword,
-                "type": "channel"
-            }).then(response => {
-                console.log("Response", response);
+    // function getSearch(keyword) {
+    //     gapi.client.youtube.search.list({
+    //             "part": "snippet",
+    //             "maxResult": 10,
+    //             "order": "viewCount",
+    //             "q": keyword,
+    //             "type": "channel"
+    //         }).then(response => {
+    //             console.log("Response", response);
 
-                const search = response.result.items;
+    //             const search = response.result.items;
 
-                if (search) {
-                    let output = `<h4 class="center-align">Search ${keyword}</h4>`;
-                    search.forEach(item => {
-                        const channelId = item.snippet.channelId;
+    //             if (search) {
+    //                 let output = `<h4 class="center-align">Search ${keyword}</h4>`;
+    //                 search.forEach(item => {
+    //                     const channelId = item.snippet.channelId;
 
-                        output += `
-                                    <ul class="collection">
-                                         <li class="collection-item avatar">
-                                           <img src="${item.snippet.thumbnails.medium.url}" alt="" class="circle">
-                                            <span class="title">${item.snippet.channelTitle}</span>
-                                            <p>${item.snippet.description}</p>
-                                        </li>
-                                    </ul>
-                                `;
-                    });
+    //                     output += `
+    //                                 <ul class="collection">
+    //                                      <li class="collection-item avatar">
+    //                                        <img src="${item.snippet.thumbnails.medium.url}" alt="" class="circle">
+    //                                         <span class="title">${item.snippet.channelTitle}</span>
+    //                                         <p>${item.snippet.description}</p>
+    //                                     </li>
+    //                                 </ul>
+    //                             `;
+    //                 });
 
-                    showSearch(output);
-                } else {
-                    alert('Error');
-                }
-            })
-            .catch(err => alert(`No result found ${keyword}`));
-    }
+    //                 showSearch(output);
+    //             } else {
+    //                 alert('Error');
+    //             }
+    //         })
+    //         .catch(err => alert(`No result found ${keyword}`));
+    // }
 
     function showSearch(data) {
         const showData = document.getElementById('show-data');

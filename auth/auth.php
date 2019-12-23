@@ -5,7 +5,7 @@ include_once('../include/user.php');
 require_once 'config.php';
 
 
-$id_token = $_POST['id_token'];
+$id_token = $_GET['id_token'];
 
 
 $payload = $google_client->verifyIdToken($id_token);
@@ -20,19 +20,15 @@ if($payload) {
     $user = new User();
     $result = $user->setIdSub($id_sub)->idSubExist();
     $data = json_decode($result);
+
   }
 
-    if($data->status === "success"){
-      $authUser = new User();
-      $results = $authUser->setIdSub($id_sub)
-            ->setFirstname($firstname)
-            ->setEmail($email)
-            ->create();
-      $newUsers = json_decode($results);
-      header('location: https://rank-me.000webhostapp.com/index.php');
-    }else{
-      die('You currently registered your google account.');
-    }
+  if($data->status === "success"){
+    
+    header('location: https://rank-me.000webhostapp.com/user/register-auth.php?id_sub='. $id_sub .'&firstname='. $firstname . "&email=". $email);
+  }else{
+    header('location: https://rank-me.000webhostapp.com/index.php');
+  }
   
 
 }else{
