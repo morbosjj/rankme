@@ -1,5 +1,9 @@
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
-// const btnSignin = document.getElementById('signin');
+const password = document.getElementsByName('password');
+const cpassword = document.getElementsByName('cpassword');
+
+const errorNoti = document.querySelector('.noti-error');
+
 
 function init() {
   gapi.load('auth2', initClient);
@@ -10,15 +14,23 @@ function initClient(){
             discoveryDocs: DISCOVERY_DOCS,
             clientId: config.clientid,
      }).then(() => {
-     	invalidLogout();
 
-        // btnSignin.onclick = invalidLogout;
+        try{
+          if(password != cpassword){
+            alert('Password did not match');
+          }
+        }catch(err){
+          console.log(err);
+        }
+        
+        invalidLogout();
+        
      });
 }
 
 
 function invalidLogout(){
-	alert("You must login via google");
-	gapi.auth2.getAuthInstance().signOut();
-	window.location.href = "https://rank-me.000webhostapp.com";
+	  alert("You must login via google");
+	  gapi.auth2.getAuthInstance().signOut();
+    window.location.href = "https://rank-me.000webhostapp.com";
 }

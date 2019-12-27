@@ -70,39 +70,60 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.navigation {
-  display: none;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: auto;
-}
 .nav-bar-nav {
   display: flex;
-  flex-direction: row;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  margin-left: auto;
+  justify-content: center;
   align-items: center;
+}
+.nav-bar-nav {
+  display: none;
+  list-style: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  flex-direction: column;
+  background-color: #E21C2B;
+  z-index: 100; 
+  width: 100%;
+  transition: all 0.5s ease;
 }
 .nav-bar-nav li {
   padding: 12px;
+  line-height: 3.2rem;
 }
 .nav-bar-nav li a {
   color: white;
   text-decoration: none;
 }
-.menu-icon {
-  position: relative;
-  cursor: pointer;
+.fa-window-close {
+  display: none;
+}
+nav.is-visible .fa-window-close {
   display: block;
 }
+nav.is-visible .fa-bars {
+  display: none;
+}
+nav.is-visible .nav-bar-nav {
+  display: flex;
+}
+.menu-icon {
+  display: block;
+  font-size: 4rem;
+  position: absolute;
+  top: 7%;
+  right: 2rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 101;
+}
+.fa-window-close {
+  display: none;
+}
+
 .menu-icon svg {
   font-size: 26px;
-}
-#menu-content {
-  display: none;
 }
 #dropdown {
   position: relative;
@@ -116,7 +137,7 @@ body {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   padding-left: 0;
-  top: 60px;
+  top: 68px;
   border-radius: 2px;
   font-size: 14px;
 }
@@ -133,7 +154,6 @@ body {
 }
 .dropdown-content li a:hover {
   color: #F6F9FC;
-  transition: all 0.5s ease-in-out;
 }
 .dropdown-content li i {
   padding-right: 8px;
@@ -141,8 +161,6 @@ body {
 .dropdown-content li:hover {
   background: #DB222A;
   color: #F6F9FC;
-  transition: 0.4s ease-in-out;
-
 }
 .is-visible {
   display: block;
@@ -166,7 +184,7 @@ body {
 .button {
   background-color: white;
   border: none;
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
@@ -177,15 +195,13 @@ body {
 }
 .signin-button {
   color: black;
+  font-size: 1rem;
 }
 .signin-button:hover {
   background: #EAECED;
 }
 .signin-button:hover {
   color: black;
-}
-.signin-button:active{
-  /* background: red; */
 }
 .currentuser-btn {
   color: black;
@@ -195,7 +211,6 @@ body {
   background-color: #F6F9FC;
   position: relative;
   height: 25vh;
-  /* overflow: hidden; */
 }
 .relative-background img {
   width: 350px;
@@ -233,11 +248,11 @@ body {
   display: flex;
   align-items: center;
   padding: .625rem;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
-  color: #222;
+  color: #f00000;
   text-align: center;
   white-space: nowrap;
   border-radius: .25rem;
@@ -433,16 +448,16 @@ body {
   border-radius: 50%;
 }
 
-  .channel-info a {
+.channel-info a {
     color: black;
     text-decoration: none;
-  }
-  .channel-info h2 {
+}
+.channel-info h2 {
     font-size: 25px;
-  }
-  a:hover {
+}
+a:hover {
     color: black;
-  }
+}
 .mobile-grid {
   display: grid;
   align-items: center;
@@ -494,17 +509,57 @@ body {
   background: linear-gradient(to right, #f00000, #dc281e);
   height: 100vh;
 }
-
-
+.login-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.login-logo.red {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #f00000;
+  background: -webkit-linear-gradient(to right, #f00000, #dc281e);
+  background: linear-gradient(to right, #f00000, #dc281e);
+}
+.notification-message {
+  text-align: center;
+}
+.noti-error {
+  border: none;
+  border-radius: 20px;
+  background: #F03A47;
+  color: white;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+.noti-success {
+  border: none;
+  border-radius: 20px;
+  background: #CFF3ED;
+  color: black;
+  padding: 2px;
+  margin-bottom: 10px;
+}
 
 @media (min-width: 768px){
-  .navigation {
+  .nav-bar-nav {
     display: flex;
+    flex-direction: row;
+    background: transparent;
+    position: relative;
+    justify-content: initial;
+    align-items: initial;
+    height: 72px;
+    overflow: initial;
+    margin-left: auto !important;
+  }
+  .signin-button {
+    font-size: 15px;
   }
   #dropdown {
-    display: block;
-  }
-  #menu-content {
     display: block;
   }
   .menu-icon {

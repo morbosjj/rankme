@@ -7,55 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/all.min.js"></script>
-
     <title>rankme</title>
 </head>
 <body>
-    <div id="signin-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Sign in</h5>
-            </div>
-
-              <div class="modal-body">
-                <br>
-                <div class="g-signin2" id="authorize-button" data-onsuccess="onSignIn"></div>
-                
-
-                <div class="middle-modal">
-                    <hr>
-                      <span class="">OR</span>
-                    <hr>
-                </div>
-
-                <div class="login-section">
-                      <form id="login-form">
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" name="password" class="form-control" placeholder="Password">
-                        </div>
-                          
-                          <button type="submit" class="btn btn-primary">Login</button>
-                      </form>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-          </div>
-    </div>
     
-    
-    <div class="content">
+    <div class="main-content">
         <header class="main-header">
             <div class="container-custom">
                     <div class="logo">
@@ -67,21 +24,25 @@
                         </div>
                     </div>
                     
-                    <div class="menu-icon">
-                        <i class="fas fa-bars"></i>
-                    </div>
-
-                    <div class="navigation">
+                    
+                    <nav>
+                            <div class="menu-icon">
+                                <i class="fas fa-bars"></i>
+                                <i class="fas fa-window-close"></i>
+                            </div>
+                            
                             <ul class="nav-bar-nav">
                                 <li><a href="https://rank-me.000webhostapp.com/index.php">Home</a></li>
                                 <li><a href="#">Blog</a></li>
                                 <li><a href="#">About</a></li>
                                 <li id="btn-auth">
-                                    <button class="button signin-button" id="anchorID">Sign in</button>
+                                    <a href="user/login.php">
+                                        <button class="button signin-button">Sign in</button>
+                                    </a>
                                 </li>
                                 <li id="btn-auth">
                                     <a href="user/register-user.php">
-                                        <button class="button signin-button" id="anchorID">Register</button>
+                                        <button class="button signin-button" id="register-button">Register</button>
                                     </a>
                                 </li>
                                 <li id="dropdown" class="profile-account" style="display: none;">
@@ -93,7 +54,7 @@
                                     </ul>
                                  </li>
                             </ul>
-                    </div>
+                    </nav>
                 
                     
             </div>
@@ -175,12 +136,9 @@
 
     <script src="js/config.js"></script>
     <script src="js/autocomplete.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.15/dist/bootstrap-native-v4.min.js"></script>
-    <script src="js/modal.js"></script> 
     <script src="https://apis.google.com/js/platform.js" async defer></script> 
     <script src="js/app.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 </body>
 </html>

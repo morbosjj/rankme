@@ -85,6 +85,7 @@ class User extends Database {
 
     $this->con->close();
   }
+
   function emailExist(){
     $stmt = $this->con->prepare("SELECT * FROM users WHERE email =?");
     $stmt->bind_param('s', $this->email);
@@ -108,4 +109,36 @@ class User extends Database {
 
     $this->con->close();
   }
+
+  function login(){
+    $stmt = $this->con->prepare("SELECT * FROM users WHERE email= ?");
+    $stmt->bind_param('s', $this->email);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    while($row = $result->fetch_assoc()){
+      if(password_verify($this->password, $row['password'])){
+        session_start();
+
+        $_SESSION['user'] = [
+            "user_id" => $row["user_id"],
+            "email" => $row["email"],
+            "firstname" => $row["firstname"],
+            "lastname" => $row["lastname"]
+        ];
+
+        return json_encode(["status" => "success", "message" => "You are now logged in"]);
+      }
+    }
+
+    return json_encode(["status" => "error", "message" => "Incorrect password or email"]);
+
+    $this->con->close();
+
+  }
+
+
+
 }
