@@ -19,7 +19,10 @@
                             <ul class="nav-bar-nav">
                                 <li><a href="https://rank-me.000webhostapp.com/index.php">Home</a></li>
                                 <li><a href="#">Blog</a></li>
-                                <li><a href="#">About</a></li>
+                                <li><a href="/about.php">About</a></li>
+                                <?php
+                                    if(!isset($_SESSION['user'])){
+                                ?>
                                 <li id="btn-auth">
                                     <a href="user/login.php">
                                         <button class="button signin-button">Sign in</button>
@@ -30,14 +33,24 @@
                                         <button class="button signin-button" id="register-button">Register</button>
                                     </a>
                                 </li>
-                                <li id="dropdown" class="profile-account" style="display: none;">
-                                    <button id="profile-name" class="button currentuser-btn dropdown-btn icon i-caret"></button>
+                                <?php
+                                    }
+                                ?>
+
+                                <?php
+                                    if(@$_SESSION['user']){
+                                ?>
+                                <li id="dropdown" class="profile-account">
+                                    <button id="profile-name" class="button currentuser-btn dropdown-btn icon i-caret"><?php echo @$_SESSION['user']['firstname'] ?>&nbsp <?php echo @$_SESSION['user']['lastname'] ?></button>
                  
                                     <ul class="dropdown-content">
                                         <li><a href="#">Profile</a></li>
-                                        <li><a href="#" id="signout-button"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+                                        <li id="signout-button"><a href="user/function/logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
                                     </ul>
-                                 </li>
+                                </li>
+                                <?php 
+                                    }
+                                ?>
                             </ul>
                     </nav>
             </div>

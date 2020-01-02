@@ -1,12 +1,18 @@
 <?php require_once("function/notification.php");?>
+<?php
+
+if(isset($_SESSION['user'])){
+  header('location: https://rank-me.000webhostapp.com');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="google-signin-client_id" content="328447961111-6ks6c3u6vmo8kvta8pjlbit7f3rpeoup.apps.googleusercontent.com">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../css/style.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/adminlte.min.css">
+	<?php include_once 'layout/links.php' ?>
 	<title>Login - Register</title>
 </head>
 <body>

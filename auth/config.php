@@ -12,5 +12,3 @@ $google_client->addScope('profile');
 
 session_start();
 
-
-?>

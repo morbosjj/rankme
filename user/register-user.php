@@ -1,10 +1,16 @@
-<?php require_once("function/notification.php");?>
+<?php require_once("function/notification.php"); ?>
+<?php
+
+if(isset($_SESSION['user'])){
+  header('location: https://rank-me.000webhostapp.com');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../css/style.min.css">
 	<title>Register - Rankme</title>
 	<?php include_once 'layout/links.php' ?>	
 </head>
@@ -38,7 +44,7 @@
 						<form action="function/users.php" method="POST">
 							<input type="hidden" value="register-user" name="action">
 								<div class="input-group mb-3">
-											<input type="text" name="firstname" class="form-control" placeholder="Firstname" required>
+											<input type="text" name="firstname" class="form-control" placeholder="Firstname" value="<?php echo @$_POST['firstname']; ?>" required>
 										<div class="input-group-append">
 												<div class="input-group-text">
 													<span class="fas fa-user"></span>
@@ -47,7 +53,7 @@
 								</div>
 
 								<div class="input-group mb-3">
-										<input type="text" name="lastname" class="form-control" placeholder="Lastname" required>
+										<input type="text" name="lastname" class="form-control" placeholder="Lastname" value="<?php echo @$_POST['lastname']; ?>" required>
 										<div class="input-group-append">
 											<div class="input-group-text">
 												<span class="fas fa-user"></span>
@@ -56,7 +62,7 @@
 								</div>
 						
 								<div class="input-group mb-3">
-									<input type="email" name="email" class="form-control" placeholder="Email" required>
+									<input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo @$_POST['email']; ?>" required>
 										<div class="input-group-append">
 											<div class="input-group-text">
 												<span class="fas fa-user"></span>

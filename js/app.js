@@ -1,6 +1,5 @@
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
 const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
-const signoutButton = document.getElementById('signout-button');
 const registerBtn = document.getElementById('register-button');
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
@@ -9,29 +8,18 @@ const keyItem = document.getElementById('keyword-item');
 const searchResult = document.getElementById('search-result');
 const keywordTitle = document.getElementById('keyword-title');
 const keywordList = document.querySelector('.all-rankings-tag');
-//Dropdown var
-const dropdown = document.getElementById('dropdown');
-const dropdownContent = document.querySelector('.dropdown-content');
-const authbtn = document.getElementById('btn-auth');
-const urlParams = new URLSearchParams(window.location.search);
-//navigation mobile
+
+
 const menuIcon = document.querySelector('.menu-icon');
 const navigation = document.querySelector('nav');
 
-menuIcon.addEventListener('click', () => {
+const authbtn = document.getElementById('btn-auth');
+const urlParams = new URLSearchParams(window.location.search);
+
+menuIcon.addEventListener('click', (e) => {
+    e.preventDefault();
     navigation.classList.toggle('is-visible');
 });
-function toggle(){
-    dropdownContent.classList.toggle('is-visible');
-}   
-
-dropdown.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggle(dropdownContent);
-});
-
-
-
 function onSignIn(googleUser){
     let profile = googleUser.getBasicProfile();
     let id_token = googleUser.getAuthResponse().id_token;
@@ -73,7 +61,6 @@ function initClient() {
         auth2.isSignedIn.listen(updateSigninStatus);
         // handle initial sign in state
         updateSigninStatus(auth2.isSignedIn.get());
-        signoutButton.onclick = handleSignoutClick;
     });
 }
 
@@ -96,13 +83,8 @@ function updateSigninStatus(isSignedIn) {
         let firstname = profile.getGivenName();
         
         showProfile(firstname);
-        dropdown.style.display = "block";
         authbtn.style.display = "none";
         registerBtn.style.display = "none";
-    } else {
-        authbtn.style.display = "block";
-        registerBtn.style.display = "block";
-        dropdown.style.display = "none";
     }
 }
 

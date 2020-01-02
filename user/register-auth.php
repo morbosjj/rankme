@@ -1,10 +1,16 @@
 <?php require_once("function/notification.php");?>
+<?php
+
+if(isset($_SESSION['user'])){
+  header('location: https://rank-me.000webhostapp.com');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../css/style.min.css">
 	<title>Register - Rankme</title>
 	<?php include_once 'layout/links.php' ?>
 </head>
@@ -102,7 +108,7 @@
 									</div>
 
 									<div class="col-lg-6">
-										<button type="submit" name="register" class="btn bg-orange btn-block btn-flat">Sign Up</button>
+										<button type="submit" name="register" class="btn bg-red btn-block btn-flat">Sign Up</button>
 									</div>
 							</div>
 						</form>

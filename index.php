@@ -1,3 +1,4 @@
+<?php require_once ('user/function/notification.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.min.css">
     <script src="js/all.min.js"></script>
+    <script src="js/ui.js"></script>
     <title>rankme</title>
 </head>
 <body>
@@ -23,6 +25,15 @@
     <?php include 'include/layout/footer.php'; ?>
 
 
+
+    <script>
+      const logo = document.querySelector('.logo');
+
+        logo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'https://rank-me.000webhostapp.com';
+        });
+    </script>
     <script src="js/config.js"></script>
     <script src="js/autocomplete.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script> 
